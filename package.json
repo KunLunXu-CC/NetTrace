@@ -5,9 +5,12 @@
   "packageManager": "pnpm@10.12.1",
   "description": "A desktop network capture and traffic inspection tool.",
   "main": "out/main/index.js",
+  "bin": {
+    "nettrace": "bin/nettrace.cjs"
+  },
   "scripts": {
-    "dev": "electron-vite dev",
-    "build": "electron-vite build",
+    "dev": "node scripts/prepare-cli-assets.cjs && node scripts/install-cli.cjs --source bin/nettrace.cjs && electron-vite dev",
+    "build": "electron-vite build && node scripts/install-cli.cjs --source out/main/capture/cli/nettrace.cjs",
     "preview": "electron-vite preview",
     "typecheck": "tsc --noEmit"
   },
